@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/33500545/148440994-34860215-6845-493c-b5b1-a9d237360875.png)
 </p>
 <p align="center">
-Notes from 2021 HolidayHackChallenge
+Just a few of my notes from 2021 HolidayHackChallenge, not complete yet... still adjusting to github.
 </p>
 
 
@@ -83,5 +83,31 @@ How many host with status up have no detected open tcp ports?
 Whats the greatest number of TCP ports any one host has opened?
 I just cycled through quizme until I hit 12.  Then i went back and did this:
 ```grep -E "(open.*){12,}" bigscan.gnmap | wc -l && grep -E "(open.*){13,}" bigscan.gnmap | wc -l```
+
+# Strace/Ltrace/Candy Making
+
+```Ltrace ./make_the_candy```
+shows there is a missing registration json file.  So i created one with nano and imputed some garbage text.
+Ran ltrace again and resulted in code so i put that into the registration json but changed every null value to True and every number output to true.  Ran again and success.
+```
+open("registration.json", "r")                       = 0x55b2b4c5a260
+getline(0x7ffee5309490, 0x7ffee5309498, 0x55b2b4c5a260, 0x7ffee5309498) = 30
+strstr("fopen("registration.json","r"\n", "Registration") = nil
+getline(0x7ffee5309490, 0x7ffee5309498, 0x55b2b4c5a260, 0x7ffee5309498) = 32
+strstr("getline ("Registration"), ("n")\n"..., "Registration") = "Registration"), ("n")\n"
+strchr("Registration"), ("n")\n", ':')                = nil
+getline(0x7ffee5309490, 0x7ffee5309498, 0x55b2b4c5a260, 0x7ffee5309498) = 35
+strstr("strstr("fopen registration.json\\"..., "Registration") = nil
+getline(0x7ffee5309490, 0x7ffee5309498, 0x55b2b4c5a260, 0x7ffee5309498) = 25
+strstr("getline ("Registration")\n", "Registration")  = "Registration")\n"
+strchr("Registration")\n", ':')                       = nil
+getline(0x7ffee5309490, 0x7ffee5309498, 0x55b2b4c5a260, 0x7ffee5309498) = 29
+strstr("strstr("\\n", "Registration")\n", "Registration") = "Registration")\n"
+strchr("Registration")\n", ':')                       = nil
+getline(0x7ffee5309490, 0x7ffee5309498, 0x55b2b4c5a260, 0x7ffee5309498) = 1
+strstr("\n", "Registration")                          = nil
+getline(0x7ffee5309490, 0x7ffee5309498, 0x55b2b4c5a260, 0x7ffee5309498) = -1
+```
+![image](https://user-images.githubusercontent.com/33500545/148628170-38863e92-9dc6-4fb3-a812-bb391ab2f5c8.png)
 
 
