@@ -1,9 +1,0 @@
-Now Hiring
-
-You are directed to apply for a job over at https://apply.jackfrosttower.com/
-So first thing is to check the site out, when you click on Opportunities you will notice that the images do not load.  There are 4 images (1.jpg, 2.jpg,3.jpg,4.jpg).
-So I decided to run this through burp as the images aren’t valid it seems.
-
-I enabled my proxy and went to apply.jackfrosttower.com/images and that resulted in a ngix error, I then sent that request to repeater, and in repeater i tried 1.jpg, with no result.  Then i tried 2.jpg and found the super secret key.
-
-
