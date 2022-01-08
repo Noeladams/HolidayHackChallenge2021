@@ -1,11 +1,15 @@
 ```
+
 Iwlist wlan0 scanning
 Iwconfig wlan0 essid FROST-Nidus-Setup
 ```
+
 “* New network connection to Nidus Thermostat detected! Visit http://nidus-setup:8080/ to complete setup”
 
-```Curl http://ndius-setup:8080/
 ```
+Curl http://ndius-setup:8080/
+```
+
 Need to adjust the api: 
 ```* http://nidus-setup:8080/apidoc
 * elf@85f15cd56977
