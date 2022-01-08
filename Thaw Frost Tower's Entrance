@@ -1,4 +1,4 @@
-```
+```wlan
 
 Iwlist wlan0 scanning
 Iwconfig wlan0 essid FROST-Nidus-Setup
