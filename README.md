@@ -48,3 +48,40 @@ curl -XPOST -H 'Content-Type: application/json' \
   http://nidus-setup:8080/api/cooler
 ```
 ![image](https://user-images.githubusercontent.com/33500545/148628021-70fd4605-b318-4324-b059-d267c73c91d9.png)
+
+# Slot Machine Investigation
+
+Go to: https://slots.jackfrosttower.com/
+Press F12 (Firefox Developer Tools)
+Click on Network
+Click SPIN once
+![image](https://user-images.githubusercontent.com/33500545/148628055-9f3c3676-fbfc-4b55-82ea-c934bf88b186.png)
+
+On the right where you see Resend click the drop/up arrows and choose edit/resend and modify the cpl=0.1 to cpl=0.99
+![image](https://user-images.githubusercontent.com/33500545/148628064-4c26c0d2-e463-485d-9508-c06756be4645.png)
+Click Send and go back and check the response, if you win it will increase.
+
+# Grep for Gold
+What port does 34.76.1.22 have open? 
+```62078```
+What port does 34.77.207.226 have open? 
+```8080```
+How many host appear “Up” in the scan? 
+```26054```
+Nano bigscan.gnmap and its in the final line.
+How many host have a web port open? 
+```17238```
+How many host have a wep port open? 
+```14372
+grep -E "80/open|443/open|8080/open" -E "/Status: Up" -c bigscan.gnmap
+```
+How many host with status up have no detected open tcp ports?
+```1st part - grep -c "Status: Up" bigscan.gnmap```
+(minus)
+```2nd part - grep -wc "tcp"  bigscan.gnmap```
+```= 402```
+Whats the greatest number of TCP ports any one host has opened?
+I just cycled through quizme until I hit 12.  Then i went back and did this:
+```grep -E "(open.*){12,}" bigscan.gnmap | wc -l && grep -E "(open.*){13,}" bigscan.gnmap | wc -l```
+
+
